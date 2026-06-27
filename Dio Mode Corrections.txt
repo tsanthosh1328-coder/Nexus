@@ -1,0 +1,7 @@
+else {
+    String upper = command;
+    upper.toUpperCase();
+    Serial.print("[DIO] ");
+    Serial.print(upper);
+    Serial.println(" — not implemented yet.");
+  }

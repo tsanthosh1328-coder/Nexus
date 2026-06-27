@@ -1,0 +1,21 @@
+// RESERVED — AT command submode, removed from active UART mode.
+// Re-integrate once AT command concepts are learned.
+
+static void cmdAt() {
+  Serial.print(F("AT command (without AT prefix, e.g. +CSQ?): "));
+  String cmd = CommandLine::readInput();
+  if (CommandLine::isAbortCommand(cmd)) return;
+
+  UartBus.print("AT");
+  UartBus.print(cmd);
+  UartBus.print("\r\n");
+
+  unsigned long start = millis();
+  while (millis() - start < 1000) {
+    if (UartBus.available()) {
+      Serial.write(UartBus.read());
+    }
+    delay(1);
+  }
+  Serial.println();
+}
